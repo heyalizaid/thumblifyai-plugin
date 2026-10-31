@@ -3,50 +3,54 @@
 
   # ThumblifyAI Plugin
 
-  **AI Thumbnail Maker tools for Cursor and compatible agent apps.**
+  **An AI Thumbnail Maker for your AI agents.**
 
-  Generate thumbnail concepts, match visual styles, and refine images through the ThumblifyAI MCP server.
+  Create, style-match, recreate, and refine YouTube thumbnails with ThumblifyAI's hosted MCP server.
 </div>
 
-## What it does
+ThumblifyAI is an AI Thumbnail Maker for creators. This repository packages its hosted [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server as a portable Agent Plugin for compatible agent apps, including Cursor, Claude, and other MCP clients.
 
-This repository packages ThumblifyAI's hosted Model Context Protocol (MCP) server as a portable Agent Plugin. The server connects to [ThumblifyAI](https://thumblifyai.com), an AI Thumbnail Maker for creators.
+## Available tools
 
-Depending on the MCP server version and your account, available workflows include:
+Connect your ThumblifyAI account to use these MCP tools. Credit costs shown are per successful operation; account plan limits apply.
 
-- Generate a thumbnail from a prompt.
-- Find thumbnail inspiration for a video idea.
-- Recreate a reference style with your trained ThumblifyAI face model.
-- Turn a sketch into a thumbnail.
-- Match the style of reference thumbnails.
-- Edit and iterate on existing thumbnails.
+| Tool | What it does | Credits |
+| --- | --- | ---: |
+| `generate_thumbnail` | Generate a thumbnail from a text prompt. Supports 16:9 and 9:16 aspect ratios. | 1 |
+| `style_match_thumbnail` | Create a thumbnail using the visual style of 1–3 reference images. | 2 |
+| `ultra_edit` | Refine or edit an image using reference images and a prompt. | 1 |
+| `recreate_thumbnail` | Recreate a reference thumbnail with your trained ThumblifyAI face model. | 3 |
+| `sketch_to_thumbnail` | Turn a sketch into a polished thumbnail. | 2 |
+| `find_thumbnail_inspirations` | Find relevant thumbnail inspiration for a video idea. | 0 |
 
-Generation and editing may use account credits. Check the tool response and your ThumblifyAI plan for current costs and availability.
+Tool availability, input requirements, and credit costs can change. Your connected agent discovers the current tool definitions from the MCP server.
 
 ## Install in Cursor
 
-1. Open Cursor's **Customize** view and browse or install plugins.
-2. Search for **ThumblifyAI** or install this public repository from Cursor's plugin marketplace when it is listed.
-3. Sign in to ThumblifyAI and create an API key under **Settings → API Keys**.
-4. Configure your MCP client to send the key as `Authorization: Bearer YOUR_API_KEY` when prompted or where that client manages MCP authentication.
+After the repository is accepted into the Cursor Marketplace:
 
-The plugin uses the portable Agent Plugins format: root `plugin.json` and `mcp.json`. It does not require a `.cursor-plugin/` directory.
+1. Open **Customize** in Cursor and go to the plugin marketplace.
+2. Search for **ThumblifyAI** and select **Install**.
+3. When Cursor connects to the MCP server, choose **OAuth** and sign in to your ThumblifyAI account.
+4. Start a chat and ask Cursor to create, style-match, recreate, or edit a thumbnail with ThumblifyAI.
 
-## Authentication
+For local evaluation before marketplace listing, add the remote MCP server in Cursor's MCP settings using `https://api.thumblifyai.com/mcp`, then authenticate with OAuth when Cursor prompts you.
 
-The hosted MCP endpoint is `https://api.thumblifyai.com/mcp`. ThumblifyAI authenticates MCP requests with a bearer API key. The portable Agent Plugins 1.0 format requires literal HTTP header values and does not provide a portable secret-variable mechanism. For that reason, this repository does not contain a key or a fake key placeholder in `mcp.json`.
+This plugin uses the portable Agent Plugins format, with `plugin.json` and `mcp.json` at the repository root. It does not need a `.cursor-plugin/` directory.
 
-If your agent app does not prompt for MCP authentication when installing the plugin, add the endpoint in that app's MCP settings and set this header there:
+## OAuth and API key authentication
+
+The hosted MCP endpoint is:
 
 ```text
-Authorization: Bearer YOUR_API_KEY
+https://api.thumblifyai.com/mcp
 ```
 
-Keep the API key in the client's secret store or local configuration. Never commit it to this repository. See the [MCP setup guide](https://github.com/heyalizaid/thumblifyai-agent-skills/blob/main/docs/ai-thumbnail-maker-mcp-server.md) for host-specific examples.
+OAuth is the recommended sign-in method for compatible MCP clients. It connects the client to your existing ThumblifyAI account; no API key needs to be copied into the plugin or committed to this repository. Some clients may offer different authentication flows. Where OAuth is unavailable, ThumblifyAI also supports bearer API key authentication if the client supports custom authorization headers.
 
-## Other agent apps
+## Other compatible agent apps
 
-Agent Plugin compatibility depends on each app's support for the open Agent Plugins specification. The MCP server itself can also be added directly to other MCP-compatible clients using the endpoint and bearer header above. See ThumblifyAI's [agent integration guide](https://thumblifyai.com/agents).
+Agent Plugin support varies by app. Apps that support the open Agent Plugins specification can use this portable package. Other MCP-compatible apps can connect directly to the endpoint above and use OAuth when offered by the client. See the [ThumblifyAI MCP setup guide](https://thumblifyai.com/agents/mcp-server) for client-specific instructions.
 
 ## Repository contents
 
@@ -59,13 +63,14 @@ thumblifyai-plugin/
 └── logo.png
 ```
 
-Skills are intentionally not included yet. They can be added under `skills/<skill-name>/SKILL.md` as they are prepared.
+Skills are not included yet. They can be added later under `skills/<skill-name>/SKILL.md`.
 
-## Product information
+## Links
 
-- Website: [thumblifyai.com](https://thumblifyai.com)
-- Product Hunt: [ThumblifyAI](https://www.producthunt.com/products/thumblifyai)
-- Agent setup: [ThumblifyAI Agents](https://thumblifyai.com/agents)
+- [ThumblifyAI](https://thumblifyai.com)
+- [MCP server and setup guide](https://thumblifyai.com/agents/mcp-server)
+- [Product Hunt](https://www.producthunt.com/products/thumblifyai)
+- [Cursor Marketplace submission](https://cursor.com/marketplace/publish)
 
 ## License
 
