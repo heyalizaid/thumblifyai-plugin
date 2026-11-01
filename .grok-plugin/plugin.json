@@ -1,0 +1,15 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "thumblifyai",
+  "description": "ThumblifyAI is an AI thumbnail maker for creating YouTube thumbnails with AI. Generate thumbnails from text prompts, recreate designs, match styles, and train AI on your face to create personalized YouTube thumbnails featuring your own likeness.",
+  "version": "1.0.0",
+  "author": {
+    "name": "ThumblifyAI",
+    "url": "https://thumblifyai.com"
+  },
+  "homepage": "https://thumblifyai.com",
+  "repository": "https://github.com/heyalizaid/thumblifyai-plugin",
+  "license": "MIT",
+  "logo": "assets/logo.png",
+  "keywords": ["ai-thumbnail-maker", "thumbnail-generation", "youtube", "image-generation", "mcp"]
+}
